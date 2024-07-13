@@ -16,10 +16,10 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '6.0.x'
+          dotnet-version: '8.0.x'
           
       - name: Restore
-        run: dotnet restore ./CurrentTimeService.sln
+        run: dotnet restore ./Starter/Starter.sln
         
       - name: Build
-        run: dotnet build ./CurrentTimeService.sln --configuration Release --no-restore
+        run: dotnet build ./Starter/Starter.sln --configuration Release --no-restore
