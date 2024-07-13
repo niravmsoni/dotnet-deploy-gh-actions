@@ -1,4 +1,4 @@
-name: Build 🚀
+name: Build and Deploy 🚀
 
 on:
   # For allowing manually running the pipeline from GH interface
