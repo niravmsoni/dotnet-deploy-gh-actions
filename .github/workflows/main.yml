@@ -29,12 +29,12 @@ jobs:
         run: dotnet restore ./Starter/Starter.sln
 
       - name: Scan for vulnerable packages
-        run: dotnet list --solution ./Starter/Starter.sln package --vulnerable --include-transitive 
+        run: dotnet list package --vulnerable --include-transitive 
 
       - name: Dotnet List Vulnerable packages
         id: scan
         run: |
-            result=$(dotnet list  --solution ./Starter/Starter.sln package --vulnerable --include-transitive)
+            result=$(dotnet list package --vulnerable --include-transitive)
             echo "$result"
             if echo "$result" | grep -q "No vulnerable packages found"; then
               echo "No vulnerabilities found"
