@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starter.WebAPI", "Starter.WebAPI\Starter.WebAPI.csproj", "{7FA0A599-3058-487F-A802-C64DE37996A3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starter/Starter.WebAPI", "Starter\Starter.WebAPI\Starter.WebAPI.csproj", "{7FA0A599-3058-487F-A802-C64DE37996A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starter.WebAPI.UnitTests", "Starter.WebAPI.UnitTests\Starter.WebAPI.UnitTests.csproj", "{8DF9DECB-0D7A-4457-84A2-C571E67E620B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starter/Starter.WebAPI.UnitTests", "Starter\Starter.WebAPI.UnitTests\Starter.WebAPI.UnitTests.csproj", "{8DF9DECB-0D7A-4457-84A2-C571E67E620B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
