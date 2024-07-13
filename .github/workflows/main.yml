@@ -28,20 +28,11 @@ jobs:
       - name: Dotnet Restore
         run: dotnet restore ./Starter/Starter.sln
 
-      - name: Scan for vulnerable packages
-        run: dotnet list package ../Starter/Starter.WebAPI/Starter.WebAPI.csproj --vulnerable --include-transitive 
-
-      - name: Dotnet List Vulnerable packages
-        id: scan
+      - name: Checking NuGet vulnerabilites
         run: |
-            result=$(dotnet list package ../Starter/Starter.WebAPI/Starter.WebAPI.csproj --vulnerable --include-transitive)
-            echo "$result"
-            if echo "$result" | grep -q "No vulnerable packages found"; then
-              echo "No vulnerabilities found"
-            else
-              echo "Vulnerabilities found"
-              exit 1
-            fi
+            dotnet list package --vulnerable --include-transitive 2>&1 | tee build.log
+            echo "Analyze dotnet list package command log output..."
+            grep -q -i "critical\|high\|moderate\|low" build.log; [ $? -eq 0 ] && echo "Security Vulnerabilities found on the log output" && exit 1
 
       # Specifying no-restore flag since we're already restoring in earlier.
       - name: Dotnet Build
