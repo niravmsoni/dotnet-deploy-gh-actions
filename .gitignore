@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/dotnet-deploy-gh-actions/v17/.wsuo
+/.vs/dotnet-deploy-gh-actions/v17/DocumentLayout.json
+/.vs/VSWorkspaceState.json
