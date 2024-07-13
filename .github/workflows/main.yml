@@ -32,7 +32,7 @@ jobs:
         run: |
             dotnet list package --vulnerable --include-transitive --format json > vulnerabilities.json
              # Parse vulnerabilities.json or use jq (if available) to parse JSON
-            if jq -e '.[] | select(.Vulnerabilities | length > 0)' vulnerabilities.json; then
+            if jq '.[] | .Vulnerabilities | length > 0' vulnerabilities.json | grep -q true; then
               echo "Vulnerabilities found. Blocking pipeline."
               exit 1
             else
