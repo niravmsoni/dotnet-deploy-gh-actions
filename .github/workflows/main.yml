@@ -1,4 +1,4 @@
-name: Build 🚀
+name: Build and Deploy 🚀
 
 on:
   # For allowing manually running the pipeline from GH interface
@@ -10,7 +10,9 @@ on:
 
 # Setup environment variables
 env:
-  DOTNET_VERSION: 8.0.x
+  DOTNET_VERSION: '8.0.x'
+  AZURE_WEBAPP_NAME: 'gh-actions-api'
+  AZURE_WEBAPP_PUBLISH_PATH: '.'
 
 jobs:
   build:
@@ -47,6 +49,9 @@ jobs:
       - name: Dotnet Test
         run: dotnet test ./Starter.sln --configuration Release --no-restore --no-build --collect:"XPlat Code Coverage" --logger trx --results-directory coverage
 
+      - name: Dotnet Publish
+        run: dotnet publish ./Starter.sln --configuration Release --no-build --output '${{ env.AZURE_WEBAPP_PUBLISH_PATH }}/myapp'
+        
       - name: Code Coverage Summary Report
         uses: irongut/CodeCoverageSummary@v1.3.0
         with:
@@ -57,4 +62,11 @@ jobs:
 
       - name: Publish Code Coverage
         run: cat code-coverage-results.md >> $GITHUB_STEP_SUMMARY
+
+      - name: Deployment
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+          package: "${{ env.AZURE_WEBAPP_PUBLISH_PATH }}/myapp"
     
