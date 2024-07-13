@@ -30,9 +30,9 @@ jobs:
 
       - name: Checking NuGet vulnerabilites
         run: |
-            dotnet list package --vulnerable --include-transitive --format json > vulnerabilities.json
-             # Parse vulnerabilities.json or use jq (if available) to parse JSON
-            if jq '.[] | .Vulnerabilities | length > 0' vulnerabilities.json | grep -q true; then
+            dotnet list package --vulnerable --include-transitive  > vulnerabilities.txt
+            # Check if vulnerabilities are found in vulnerabilities.txt
+            if grep -q "Vulnerabilities found" vulnerabilities.txt; then
               echo "Vulnerabilities found. Blocking pipeline."
               exit 1
             else
