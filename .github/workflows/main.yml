@@ -34,4 +34,12 @@ jobs:
 
       # Specifying no-restore and no-build to speed up the process
       - name: Test
-        run: dotnet test ./Starter/Starter.sln --configuration Release --no-restore --no-build
+        run: dotnet test ./Starter/Starter.sln --configuration Release --no-restore --no-build --collect:"XPlat Code Coverage" --logger trx --results-directory coverage
+
+      - name: Code Coverage Summary Report
+        uses: irongut/CodeCoverageSummary@v1.3.0
+        with:
+           filename: 'coverage/*/coverage.cobertura.xml'
+           badge: true
+           format: 'markdown'
+           output: 'both'
