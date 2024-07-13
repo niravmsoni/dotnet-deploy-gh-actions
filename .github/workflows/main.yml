@@ -25,15 +25,27 @@ jobs:
         with:
           dotnet-version: ${{env.DOTNET_VERSION}}
 
-      - name: Restore
+      - name: Dotnet Restore
         run: dotnet restore ./Starter/Starter.sln
 
+      - name: Dotnet List Vulnerable packages
+        id: scan
+        run: |
+            result=$(dotnet list package --vulnerable --include-transitive)
+            echo "$result"
+            if echo "$result" | grep -q "No vulnerable packages found"; then
+              echo "No vulnerabilities found"
+            else
+              echo "Vulnerabilities found"
+              exit 1
+            fi
+
       # Specifying no-restore flag since we're already restoring in earlier.
-      - name: Build
+      - name: Dotnet Build
         run: dotnet build ./Starter/Starter.sln --configuration Release --no-restore
 
       # Specifying no-restore and no-build to speed up the process
-      - name: Test
+      - name: Dotnet Test
         run: dotnet test ./Starter/Starter.sln --configuration Release --no-restore --no-build --collect:"XPlat Code Coverage" --logger trx --results-directory coverage
 
       - name: Code Coverage Summary Report
@@ -44,6 +56,6 @@ jobs:
            format: 'markdown'
            output: 'both'
 
-      - name: Write to Job Summary
+      - name: Publish Code Coverage
         run: cat code-coverage-results.md >> $GITHUB_STEP_SUMMARY
     
