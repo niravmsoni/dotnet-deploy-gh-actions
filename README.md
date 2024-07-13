@@ -84,8 +84,10 @@ We've used the below steps:
       - `--no-restore` switch will instruct the compiler to build the project without restoring (Since we've explicitly restored the project earlier) and we can save time here
    - `dotnet test`
       - We would like to run the tests and along with that also publsh the code coverage report.
-      - For publishing the code coverage report, there's a pre-requisite to have `coverlet.collector` dependency present in the Unit Test project. We already have it configured and present under `Starter.WebAPI.UnitTests.csproj`,
-      - 
+   - `Create Code Coverage`
+      - Create code coverage report
+   - `Publish Coverage report`
+      - Publish the code coverage report as output of the Github summary  
 
 ```yaml
 jobs:
@@ -93,7 +95,6 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      # Checkout code
       - uses: actions/checkout@v3
 
       - name: Setup .NET
@@ -107,7 +108,6 @@ jobs:
       - name: Checking NuGet vulnerabilites
         run: |
             dotnet list package --vulnerable --include-transitive  > vulnerabilities.txt
-            # Check if vulnerabilities are found in vulnerabilities.txt
             if grep -q "Vulnerabilities found" vulnerabilities.txt; then
               echo "Vulnerabilities found. Blocking pipeline."
               exit 1
@@ -115,11 +115,9 @@ jobs:
               echo "No vulnerabilities found."
             fi
 
-      # Specifying no-restore flag since we're already restoring in earlier.
       - name: Dotnet Build
         run: dotnet build ./Starter.sln --configuration Release --no-restore
 
-      # Specifying no-restore and no-build to speed up the process
       - name: Dotnet Test
         run: dotnet test ./Starter.sln --configuration Release --no-restore --no-build --collect:"XPlat Code Coverage" --logger trx --results-directory coverage
 
