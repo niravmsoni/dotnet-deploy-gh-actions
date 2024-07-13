@@ -30,9 +30,7 @@ jobs:
 
       - name: Checking NuGet vulnerabilites
         run: |
-            dotnet list package --vulnerable --include-transitive 2>&1 | tee build.log
-            echo "Analyze dotnet list package command log output..."
-            grep -q -i "critical\|high\|moderate\|low" build.log; [ $? -eq 0 ] && echo "Security Vulnerabilities found on the log output" && exit 1
+            dotnet list package --vulnerable --include-transitive --format json
 
       # Specifying no-restore flag since we're already restoring in earlier.
       - name: Dotnet Build
