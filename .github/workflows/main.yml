@@ -50,7 +50,7 @@ jobs:
         run: dotnet test ./Starter.sln --configuration Release --no-restore --no-build --collect:"XPlat Code Coverage" --logger trx --results-directory coverage
 
       - name: Dotnet Publish
-        run: dotnet publish ./Starter.sln --configuration Release --no-build --output '${{ env.AZURE_WEBAPP_PUBLISH_PATH }}/myapp'
+        run: dotnet publish ./Starter/Starter.WebAPI/Starter.WebAPI.csproj --configuration Release --no-build --output '${{ env.AZURE_WEBAPP_PUBLISH_PATH }}/myapp'
         
       - name: Code Coverage Summary Report
         uses: irongut/CodeCoverageSummary@v1.3.0
