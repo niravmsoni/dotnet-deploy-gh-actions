@@ -1,25 +1,37 @@
 name: Build and Deploy 🚀
 
 on:
+  # For allowing manually running the pipeline from GH interface
   workflow_dispatch:
+  # For auto-triggering when changes pushed to main branch
   push:
     branches:
     - main
 
+# Setup environment variables
+env:
+  DOTNET_VERSION: 8.0.x
+
 jobs:
-  publish:
+  build:
     runs-on: ubuntu-latest
     
     steps:
+      # Checkout code
       - uses: actions/checkout@v3
-      
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '8.0.x'
-          
+          dotnet-version: ${{env.DOTNET_VERSION}}
+
       - name: Restore
         run: dotnet restore ./Starter/Starter.sln
-        
+
+      # Specifying no-restore flag since we're already restoring in earlier.
       - name: Build
         run: dotnet build ./Starter/Starter.sln --configuration Release --no-restore
+
+      # Specifying no-restore and no-build to speed up the process
+      - name: Test
+        run: dotnet test ./Starter/Starter.sln --configuration Release --no-restore --no-build
