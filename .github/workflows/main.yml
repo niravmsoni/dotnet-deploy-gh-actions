@@ -11,7 +11,7 @@ on:
 # Setup environment variables
 env:
   DOTNET_VERSION: '8.0.x'
-  AZURE_WEBAPP_NAME: 'starter-webapi'
+  AZURE_WEBAPP_NAME: 'gh-actions-api'
   AZURE_WEBAPP_PUBLISH_PATH: '.'
 
 jobs:
