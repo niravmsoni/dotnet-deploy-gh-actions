@@ -21,5 +21,12 @@ Is there a better way to handle this problem proactively?
 - Let's look at what this individual options do:
   - Enable `Dependabot alerts` - For receiving notifications regarding dependabot either in GitHub   notifications or over Emails
   - Enable `Dependabot security updates` - Using this, Dependabot can find out vulnerabilities which are exposed and it can alert us
-  - Enable `Dependabot version updates` - Using this, we can enable the version updates for dependencies (For example - A new version for `coverlet.collector` is available on NuGet (6.0.2) and our code is using an older version (6.0.0), then we can use option to enable version updates
+  - Configure `Dependabot version updates` - Using this, we can enable the version updates for dependencies (For example - A new version for `coverlet.collector` is available on NuGet `(6.0.2)` and our code is using an older version `(6.0.0)`, then we can use option to enable version updates
 
+## Configure Dependabot version updates
+- Upon clicking Configure Dependebot version updates, it will create a setting which is configured as GitHub action namely `dependabot.yml` under .github folder
+![2](https://github.com/user-attachments/assets/c0482881-5795-4495-85e3-8c306dbecbb4)
+- Let's understand these options:
+  - `package-ecosystem` - Since we're dealing with a .NET project, we can enter `nuget` here. You can find all other package ecosystem options [here](https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file)
+  - `directory` - Since we want Dependabot to scan the entire repository, we'll leave this as `/`
+  - `schedule` - For the sake of demo, let's go with `daily`
