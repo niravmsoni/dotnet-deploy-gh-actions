@@ -71,7 +71,7 @@ jobs:
           path: .
 
   deploy:
-    if: env.SHOULD_DEPLOY == 'true'
+    if: ${{ env.SHOULD_DEPLOY == 'true' }}
     runs-on: ubuntu-latest
     needs: build
 
