@@ -14,10 +14,12 @@ In these cases, developers reactively review and update their dependencies.
 Is there a better way to handle this problem proactively?
 
 ## Enter Dependabot
-[Dependabot](https://docs.github.com/en/code-security/dependabot/working-with-dependabot) is a bot that integrates with GitHub and helps us update the dependency of our solutions
-
-## Enabling Dependabot
+- [Dependabot](https://docs.github.com/en/code-security/dependabot/working-with-dependabot) is a bot that integrates with GitHub and helps us update the dependency of our solutions
 - For enabling Dependabot support for your repository, go to Settings tab and you'll find a section namely "Code Security and analysis" where you'll find Dependabot related configurations
 
 ![1](https://github.com/user-attachments/assets/a7df828a-5594-41ba-aadf-a38ba3a1c380)
-- 
+- Let's look at what this individual options do:
+  - Enable `Dependabot alerts` - For receiving notifications regarding dependabot either in GitHub   notifications or over Emails
+  - Enable `Dependabot security updates` - Using this, Dependabot can find out vulnerabilities which are exposed and it can alert us
+  - Enable `Dependabot version updates` - Using this, we can enable the version updates for dependencies (For example - A new version for `coverlet.collector` is available on NuGet (6.0.2) and our code is using an older version (6.0.0), then we can use option to enable version updates
+
